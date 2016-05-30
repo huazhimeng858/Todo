@@ -22,11 +22,11 @@ angular.module('myApp', []).controller('myAngularApp', function($scope,$interval
     $scope.currentitem = true;
     $scope.count=0;
     $scope.total=14;
+    $scope.currenttime=new Date();
     $scope.countRegister=function(){
         $scope.count++;
     };
     $scope.objects=new Object();
-
     //**随机抽三个人显示出来***///
     $scope.randomPeople=function(){
         var num = new Array();
@@ -47,9 +47,9 @@ angular.module('myApp', []).controller('myAngularApp', function($scope,$interval
         }
         console.log($scope.objects);
     };
-    //$scope.randomPeople();
+    $scope.randomPeople();
     $scope.seeMore=function(){
-        $scope.names.call($scope.objects);
+        $scope.objects =$scope.names;
     };
     $scope.currentPeople=function(){
         //$http.get("register.html").then(function (response) {
@@ -76,6 +76,8 @@ angular.module('myApp', []).controller('myAngularApp', function($scope,$interval
         $scope.register=true;
         console.log(this);
         this.currentitem = false;
+        $scope.currenttime=new Date();
+        console.log()
         $scope.countRegister();
     };
     //**每隔1s从后台取数据**//
