@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/angular.js"></script>
+    <!--<script src="js/booter.js"></script>-->
+    <script src="js/controllers.js"></script>
+    <style>
+    .title{text-align: center}
+    #main {
+    border: 1px dotted #f0f;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    }
+    .list-group-item{display: inline-block;width:200px;height:300px;}
+    section {
+    border: 1px dotted #f00;
+    margin:20px;text-align: center;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="title">
+        <h1>签到</h1>
+    </div>
+    <div id="ng-app" ng-app="myApp" ng-controller="myAngularApp">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="x in objects" ng-show="currentitem">
+                <section>
+                    <img ng-src={{x.img}} alt="">
+                    <p>{{x.name}}</p>
+                    <input class="item-destroy" ng-click="finishRegister(item)" type="button" value="签到">
+                </section>
+            </li>
+        </ul>
+        <button ng-click="seeMore()">查看更多</button>
+        <div ng-model="count">总数14人，已签到人数：{{count}}人</div>
+    </div>
+</body>
+</html>

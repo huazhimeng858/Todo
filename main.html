@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<style>-->
+        <!--.title{text-align: center}-->
+        <!--#main {-->
+            <!--border: 1px dotted #f0f;-->
+            <!--padding: 10px;-->
+            <!--display: flex;-->
+            <!--flex-direction: row;-->
+        <!--}-->
+        <!--.list-group-item{display: inline-block;width:200px;height:300px;}-->
+        <!--section {-->
+            <!--border: 1px dotted #f00;-->
+            <!--padding: 1em;-->
+        <!--}-->
+    <!--</style>-->
+    <!--<script src="js/Angular.js"></script>-->
+</head>
+<body>
+<!--<div class="title">-->
+    <!--<h1>签到</h1>-->
+<!--</div>-->
+<!--<div id="main" ng-app="myApp" ng-init="names=[-->
+<!--{img:'todo/images/people.jpg',name:'张三'},-->
+<!--{img:'todo/images/people.jpg',name:'李四'},-->
+<!--{img:'todo/images/people.jpg',name:'王五'}]">-->
+    <!--<ul class="list-group" ng-repeat="x	in names">-->
+        <!--{{<li class="list-group-item">-->
+        <!--<section>-->
+            <!--<img src={{x.img}} alt="">-->
+            <!--<p>{{x.name}}</p>-->
+        <!--</section>-->
+    <!--</li>}}-->
+
+    <!--</ul>-->
+<!--</div>-->
+<!--<div ng-app="" ng-init="names=[-->
+<!--{name:'Jani',country:'Norway'},-->
+<!--{name:'Hege',country:'Sweden'},-->
+<!--{name:'Kai',country:'Denmark'}]">-->
+    <!--<p>循环对象：</p>-->
+    <!--<ul>-->
+        <!--<li ng-repeat="x in names">-->
+            <!--{{ x.name + ', ' + x.country }}-->
+        <!--</li>-->
+    <!--</ul>-->
+<!--</div>-->
+<!--<div ng-app="" ng-init="quantity=1;cost=5">-->
+    <!--<p>总价：<span ng-bind="quantity * cost"></span></p>-->
+
+<!--</div>-->
+<div id="todoapp">
+    <div class="title">
+        <h1>
+            签到
+        </h1>
+    </div>
+    <div class="content">
+        <form id="todo-form" ng:submit="addTodo()">
+            <input id="new-todo" name="newTodo" placeholder="What needs to be done?" type="text">
+                <span class="ui-tooltip-top" ng:show="showHitEnterHint">
+                    Press Enter to save this task
+                </span>
+        </form>
+        <div id="todos">
+            <ul id="todo-list">
+                <li class="todo" ng:class="'editing-' + todo.editing + ' done-' + todo.done" ng:repeat="todo in todos">
+                    <div class="display">
+                        <input class="check" type="checkbox" name="todo.done" / >
+                        <div ng:click="editTodo(todo)" class="todo-content"> {{ todo.content }} </div>
+                        <span class="todo-destroy" ng:click="removeTodo(todo)"></span>
+                    </div>
+                    <div class="edit">
+                        <form ng:submit="finishEditing(todo)">
+                            <input class="todo-input" my:focus="todo.editing" my:blur="finishEditing(todo)" name="todo.content" type="text">
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="todo-stats">
+              <span class="todo-count" ng:show="hasTodos()">
+                <span class="number">{{ remainingTodos() }}</span>
+                <span class="word">items</span> left.
+              </span>
+              <span class="todo-clear" ng:show="hasFinishedTodos()">
+                  <a ng:click="clearCompletedItems()">
+                      Clear <span class="number-done">{{ finishedTodos() }}</span>
+                      completed <span class="word-done">item</span>
+                  </a>
+              </span>
+        </div>
+    </div>
+</div>
+<ul id="instructions">
+    <li>Click to edit a todo.</li>
+</ul>
+<div id="credits">
+    <p>
+        Originally Created by
+        <br>
+        <a href="http://jgn.me/">Jérôme Gravel-Niquet</a>
+    </p>
+    <p>
+        Rewritten by
+        <br>
+        <a href="http://cburgdorf.wordpress.com/">Christoph Burgdorf</a>
+    </p>
+    <p>
+        This clone of backbones todo App has been written with
+        <a href="http://angularjs.org">AngularJS </a>
+        Feel free to fork the code and play a little! Find it here at
+        <a href="https://github.com/cburgdorf/Angular-ToDo-App"> my github repository</a>
+    </p>
+    <p>
+        Ah and one more thing, I also put the <a href="#/credits">credits</a> here to show that routing is build in and
+        really is a breeze.
+    </p>
+</div>
+
+</body>
+</html>
