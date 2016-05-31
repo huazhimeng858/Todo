@@ -3,20 +3,20 @@
  */
 angular.module('myApp', []).controller('myAngularApp', function($scope,$interval,$http) {
     $scope.names = [
-        {img:'todo/images/people.jpg',name:'张三',mac:'1'},
-        {img:'todo/images/people.jpg',name:'李四',mac:'2'},
-        {img:'todo/images/people.jpg',name:'王五',mac:'3'},
-        {img:'todo/images/people.jpg',name:'张三',mac:'4'},
-        {img:'todo/images/people.jpg',name:'李四',mac:'5'},
-        {img:'todo/images/people.jpg',name:'王五',mac:'6'},
-        {img:'todo/images/people.jpg',name:'张三',mac:'7'},
-        {img:'todo/images/people.jpg',name:'李四',mac:'8'},
-        {img:'todo/images/people.jpg',name:'王五',mac:'9'},
-        {img:'todo/images/people.jpg',name:'张三',mac:'10'},
-        {img:'todo/images/people.jpg',name:'李四',mac:'11'},
-        {img:'todo/images/people.jpg',name:'王五',mac:'12'},
-        {img:'todo/images/people.jpg',name:'张三',mac:'13'},
-        {img:'todo/images/people.jpg',name:'李四',mac:'14'}
+        {img:'todo/images/people.jpg',name:'张三',mac:'1',register:false},
+        {img:'todo/images/people.jpg',name:'李四',mac:'2',register:false},
+        {img:'todo/images/people.jpg',name:'王五',mac:'3',register:false},
+        {img:'todo/images/people.jpg',name:'张三',mac:'4',register:false},
+        {img:'todo/images/people.jpg',name:'李四',mac:'5',register:false},
+        {img:'todo/images/people.jpg',name:'王五',mac:'6',register:false},
+        {img:'todo/images/people.jpg',name:'张三',mac:'7',register:false},
+        {img:'todo/images/people.jpg',name:'李四',mac:'8',register:false},
+        {img:'todo/images/people.jpg',name:'王五',mac:'9',register:false},
+        {img:'todo/images/people.jpg',name:'张三',mac:'10',register:false},
+        {img:'todo/images/people.jpg',name:'李四',mac:'11',register:false},
+        {img:'todo/images/people.jpg',name:'王五',mac:'12',register:false},
+        {img:'todo/images/people.jpg',name:'张三',mac:'13',register:false},
+        {img:'todo/images/people.jpg',name:'李四',mac:'14',register:false}
     ];
     $scope.register=false;
     $scope.currentitem = true;
@@ -29,6 +29,7 @@ angular.module('myApp', []).controller('myAngularApp', function($scope,$interval
     $scope.objects=new Object();
     //**随机抽三个人显示出来***///
     $scope.randomPeople=function(){
+        ///**只用于生产三个随机数***///
         var num = new Array();
         for(var i = 0; i < 3; i++){
             var val =  Math.floor(Math.random() * $scope.total);
@@ -41,11 +42,11 @@ angular.module('myApp', []).controller('myAngularApp', function($scope,$interval
             else
                 num[num.length] = val;
         }
-        console.log(num);
         for(var j=0;j<3;j++){
             $scope.objects[j]=$scope.names[num[j]];
         }
-        console.log($scope.objects);
+        num.length=0;
+        console.log($scope.names);
     };
     $scope.randomPeople();
     $scope.seeMore=function(){
@@ -63,22 +64,27 @@ angular.module('myApp', []).controller('myAngularApp', function($scope,$interval
 
     };
     $scope.currentPeople();
+    $scope.notRengister=function(){
 
+    };
     $scope.finishRegister=function(item){
-        //**判断数据如果mac地址出现的时候就将该mac地址对应的人员显示出来，当没人的时候将只显示3个人**///
-        //for(var p in $scope.names){
-        //    if($scope.names[p].mac==$scope.myRegister.mac){
-        //        $scope.names.splice(p, 1);
-        //        //this.currentitem = false;
-        //    }
-        //}
-        //**判断数据如果mac地址出现的时候就将该mac地址对应的人员显示出来，当没人的时候将只显示3个人---按钮实现**///
-        $scope.register=true;
-        console.log(this);
+        for(var i=0;i<$scope.total;i++){
+            if(item==$scope.names[i]){
+                $scope.names.splice(i,1);
+            }
+        }
+        $scope.total--;
+        console.log($scope.names);
+        console.log($scope.total);
+        this.register=true;
         this.currentitem = false;
         $scope.currenttime=new Date();
-        console.log()
         $scope.countRegister();
+        if($scope.total>2){
+            $scope.randomPeople();
+            this.currentitem = true;
+        }
+
     };
     //**每隔1s从后台取数据**//
     //$interval(function () {
