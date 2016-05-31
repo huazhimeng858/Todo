@@ -26,7 +26,6 @@ angular.module('myApp', []).controller('myAngularApp', function($scope,$interval
     $scope.countRegister=function(){
         $scope.count++;
     };
-    $scope.stringTime="2016-05-1 01:01:01";
     $scope.objects=new Array();
     $scope.user=new Array();
     //**随机抽三个人显示出来***///
