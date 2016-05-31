@@ -3,41 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/angular.js"></script>
     <!--<script src="js/booter.js"></script>-->
     <script src="js/controllers.js"></script>
     <style>
-    .title{text-align: center}
-    #main {
-    border: 1px dotted #f0f;
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    }
-    .list-group-item{display: inline-block;width:200px;height:300px;}
-    section {
-    border: 1px dotted #f00;
-    margin:20px;text-align: center;
-    }
+        body{font-size:16px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+        .list-group-item{display: inline-block;}
+        .item-people-name{margin:20px 0;color:indianred;font-weight: 600;}
+        .list-group{margin:20px 0;}
+        .list-seemore{padding:30px 0;}
     </style>
 </head>
-<body>
+<body id="ng-app" ng-app="myApp" ng-controller="myAngularApp">
+    <div class="register-content">
+        <div class="row">
+            <div class="container">
+                <div class="text-center">
+                    <h1>签到</h1>
 
-    <div class="title">
-        <h1>签到</h1>
-    </div>
-    <div id="ng-app" ng-app="myApp" ng-controller="myAngularApp">
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="x in objects" ng-show="currentitem">
-                <section>
-                    <img ng-src={{x.img}} alt="">
-                    <p>{{x.name}}</p>
-                    <input class="item-destroy" ng-click="finishRegister(x)" type="button" value="签到">
-                </section>
-            </li>
-        </ul>
-        <button ng-click="seeMore()">查看更多</button>
-        <div ng-model="count">总数14人，已签到人数：{{count}}人</div>
+                    <div ng-model="count">总数14人，已签到人数：{{count}}人</div>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center" ng-repeat="x in objects" ng-show="currentitem">
+                        <section>
+                            <img ng-src={{x.img}} alt="" class="img-responsive" style="width:100%;">
+                            <p class="item-people-name">{{x.name}}</p>
+                            <input class="btn btn-primary" ng-click="finishRegister(x)" type="button" value="签到">
+                        </section>
+                    </li>
+                </ul>
+                <div ng-click="seeMore()" ng-hide="morelist" class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-12 text-center btn btn-primary btn-lg list-seemore"><span class="glyphicon glyphicon-chevron-down"></span></div>
+                <div class="jumbotron" ng-hide="complete">
+                    <h1>签到完成</h1>
+                    <p></p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button" ng-click="registerAgain()">再次签到</a></p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
