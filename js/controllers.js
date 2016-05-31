@@ -3,20 +3,20 @@
  */
 angular.module('myApp', []).controller('myAngularApp', function($scope,$interval,$http) {
     $scope.names = [
-        {img:'todo/images/people.jpg',name:'张三',mac:'1',register:false},
-        {img:'todo/images/people.jpg',name:'李四',mac:'2',register:false},
-        {img:'todo/images/people.jpg',name:'王五',mac:'3',register:false},
-        {img:'todo/images/people.jpg',name:'张三',mac:'4',register:false},
-        {img:'todo/images/people.jpg',name:'李四',mac:'5',register:false},
-        {img:'todo/images/people.jpg',name:'王五',mac:'6',register:false},
-        {img:'todo/images/people.jpg',name:'张三',mac:'7',register:false},
-        {img:'todo/images/people.jpg',name:'李四',mac:'8',register:false},
-        {img:'todo/images/people.jpg',name:'王五',mac:'9',register:false},
-        {img:'todo/images/people.jpg',name:'张三',mac:'10',register:false},
-        {img:'todo/images/people.jpg',name:'李四',mac:'11',register:false},
-        {img:'todo/images/people.jpg',name:'王五',mac:'12',register:false},
-        {img:'todo/images/people.jpg',name:'张三',mac:'13',register:false},
-        {img:'todo/images/people.jpg',name:'李四',mac:'14',register:false}
+        {img:'todo/images/people.jpg',name:'张一',mac:'1',time:'1'},
+        {img:'todo/images/people.jpg',name:'李二',mac:'2',time:'2'},
+        {img:'todo/images/people.jpg',name:'王三',mac:'3',time:'3'},
+        {img:'todo/images/people.jpg',name:'张四',mac:'4',time:'4'},
+        {img:'todo/images/people.jpg',name:'李五',mac:'5',time:'5'},
+        {img:'todo/images/people.jpg',name:'王六',mac:'6',time:'6'},
+        {img:'todo/images/people.jpg',name:'张七',mac:'7',time:'7'},
+        {img:'todo/images/people.jpg',name:'李八',mac:'8',time:'8'},
+        {img:'todo/images/people.jpg',name:'王九',mac:'9',time:'9'},
+        {img:'todo/images/people.jpg',name:'张十',mac:'10',time:'10'},
+        {img:'todo/images/people.jpg',name:'李十一',mac:'11',time:'11'},
+        {img:'todo/images/people.jpg',name:'王十二',mac:'12',time:'12'},
+        {img:'todo/images/people.jpg',name:'张十三',mac:'13',time:'13'},
+        {img:'todo/images/people.jpg',name:'李十四',mac:'14',time:'14'}
     ];
     $scope.register=false;
     $scope.currentitem = true;
@@ -26,7 +26,9 @@ angular.module('myApp', []).controller('myAngularApp', function($scope,$interval
     $scope.countRegister=function(){
         $scope.count++;
     };
-    $scope.objects=new Object();
+    $scope.stringTime="2016-05-1 01:01:01";
+    $scope.objects=new Array();
+    $scope.user=new Array();
     //**随机抽三个人显示出来***///
     $scope.randomPeople=function(){
         ///**只用于生产三个随机数***///
@@ -45,46 +47,36 @@ angular.module('myApp', []).controller('myAngularApp', function($scope,$interval
         for(var j=0;j<3;j++){
             $scope.objects[j]=$scope.names[num[j]];
         }
+        console.log($scope.objects);
+        if($scope.total>3){
+            $scope.objects.splice(3,$scope.total-2);
+        }
         num.length=0;
-        console.log($scope.names);
     };
     $scope.randomPeople();
     $scope.seeMore=function(){
-        $scope.objects =$scope.names;
-    };
-    $scope.currentPeople=function(){
-        //$http.get("register.html").then(function (response) {
-        //    $scope.myRegister = response.data;
-        //    console.log($scope.myRegister);
-        //});
-        //
-        //$scope.objects=$scope.myRegister;
-        //console.log($scope.objects);
-
-
-    };
-    $scope.currentPeople();
-    $scope.notRengister=function(){
-
+        for(var i=0;i<$scope.total;i++){
+            $scope.objects[i]=$scope.names[i];
+        };
     };
     $scope.finishRegister=function(item){
+        console.log($scope.names);
         for(var i=0;i<$scope.total;i++){
             if(item==$scope.names[i]){
                 $scope.names.splice(i,1);
             }
         }
         $scope.total--;
-        console.log($scope.names);
-        console.log($scope.total);
-        this.register=true;
         this.currentitem = false;
-        $scope.currenttime=new Date();
+        item.time=new Date().getTime().toString();
+        console.log(item);
+        $scope.user.push(item);
+        console.log($scope.user);
         $scope.countRegister();
         if($scope.total>2){
             $scope.randomPeople();
             this.currentitem = true;
         }
-
     };
     //**每隔1s从后台取数据**//
     //$interval(function () {
